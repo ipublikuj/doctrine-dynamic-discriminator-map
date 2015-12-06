@@ -14,11 +14,13 @@
 
 namespace IPub\DoctrineDynamicDiscriminatorMap\DI;
 
-use IPub\DoctrineDynamicDiscriminatorMap\MapItem;
 use Nette;
 use Nette\DI;
 use Nette\Utils;
 use Nette\PhpGenerator as Code;
+
+use IPub;
+use IPub\DoctrineDynamicDiscriminatorMap;
 
 class DoctrineDynamicDiscriminatorMapExtension extends DI\CompilerExtension
 {
@@ -40,7 +42,7 @@ class DoctrineDynamicDiscriminatorMapExtension extends DI\CompilerExtension
 			->setClass('IPub\DoctrineDynamicDiscriminatorMap\Map');
 
 		foreach($config['mapping'] as $entityName => $map) {
-			$mapItem = new MapItem($entityName, $map['entity']);
+			$mapItem = new DoctrineDynamicDiscriminatorMap\MapItem($entityName, $map['entity']);
 
 			foreach($map['map'] as $name=>$entity) {
 				$mapItem->addMap($name, $entity);

@@ -22,7 +22,9 @@
 	"require": {
 		"php"			: ">=5.4",
 		"doctrine/orm"	: "2.3.*@stable",
-		"nette/di"		: "~2.2"
+		"nette/di"		: "~2.2",
+		"nette/utils"	: "~2.2",
+		"kdyby/events"	: "~2.0"
 	},
 
 	"require-dev": {
