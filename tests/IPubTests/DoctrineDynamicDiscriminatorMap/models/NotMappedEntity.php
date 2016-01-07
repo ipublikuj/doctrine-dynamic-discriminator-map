@@ -17,18 +17,10 @@ namespace IPubTests\DoctrineDynamicDiscriminatorMap\Models;
 use Doctrine;
 use Doctrine\ORM\Mapping as ORM;
 
-use IPub\DoctrineDynamicDiscriminatorMap\Entities;
-
 /**
  * @ORM\Entity
  */
-class StudentEntity extends PersonEntity implements Entities\IDiscriminatorProvider
+class NotMappedEntity extends PersonEntity
 {
-	/**
-	 * @return string
-	 */
-	public function getDiscriminatorName()
-	{
-		return 'student';
-	}
+
 }
