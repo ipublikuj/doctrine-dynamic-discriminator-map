@@ -39,7 +39,7 @@ final class DoctrineDynamicDiscriminatorMapExtension extends DI\CompilerExtensio
 		$builder = $this->getContainerBuilder();
 
 		// Define events
-		$builder->addDefinition($this->prefix('listeners'))
+		$builder->addDefinition($this->prefix('listener'))
 			->setClass(Events\DynamicDiscriminatorListener::CLASS_NAME)
 			->addTag(KdybyEvents\DI\EventsExtension::TAG_SUBSCRIBER);
 	}
