@@ -24,7 +24,9 @@
 
 		"doctrine/orm"	: "~2.4",
 
-		"nette/di"	: "~2.2"
+		"nette/di"	: "~2.2",
+
+		"kdyby/events"	: "~3.0"
 	},
 
 	"require-dev": {

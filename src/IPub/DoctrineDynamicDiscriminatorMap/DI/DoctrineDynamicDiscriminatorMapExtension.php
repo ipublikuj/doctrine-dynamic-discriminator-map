@@ -18,7 +18,8 @@ use Nette;
 use Nette\DI;
 use Nette\PhpGenerator as Code;
 
-use Doctrine\Common;
+use Kdyby;
+use Kdyby\Events as KdybyEvents;
 
 use IPub\DoctrineDynamicDiscriminatorMap;
 use IPub\DoctrineDynamicDiscriminatorMap\Events;
@@ -39,15 +40,8 @@ final class DoctrineDynamicDiscriminatorMapExtension extends DI\CompilerExtensio
 
 		// Define events
 		$builder->addDefinition($this->prefix('subscriber'))
-			->setClass(Events\DynamicDiscriminatorSubscriber::CLASS_NAME);
-	}
-
-	public function beforeCompile()
-	{
-		$builder = $this->getContainerBuilder();
-
-		$builder->getDefinition($builder->getByType('Doctrine\Common\EventManager'))
-			->addSetup('?->addEventSubscriber(?)', ['@self', $builder->getDefinition($this->prefix('subscriber'))]);
+			->setClass(Events\DynamicDiscriminatorSubscriber::CLASS_NAME)
+			->addTag(KdybyEvents\DI\EventsExtension::TAG_SUBSCRIBER);
 	}
 
 	/**
@@ -57,7 +51,7 @@ final class DoctrineDynamicDiscriminatorMapExtension extends DI\CompilerExtensio
 	public static function register(Nette\Configurator $config, $extensionName = 'dynamicDiscriminatorMap')
 	{
 		$config->onCompile[] = function (Nette\Configurator $config, Nette\DI\Compiler $compiler) use ($extensionName) {
-			$compiler->addExtension($extensionName, new DoctrineDynamicDiscriminatorMapExtension());
+			$compiler->addExtension($extensionName, new DoctrineDynamicDiscriminatorMapExtension);
 		};
 	}
 }

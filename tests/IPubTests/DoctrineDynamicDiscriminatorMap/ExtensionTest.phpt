@@ -39,7 +39,7 @@ class ExtensionTest extends Tester\TestCase
 	{
 		$dic = $this->createContainer();
 
-		Assert::true($dic->getService('dynamicDiscriminatorMap.listener') instanceof DoctrineDynamicDiscriminatorMap\Events\DynamicDiscriminatorListener);
+		Assert::true($dic->getService('dynamicDiscriminatorMap.subscriber') instanceof DoctrineDynamicDiscriminatorMap\Events\DynamicDiscriminatorSubscriber);
 	}
 
 	/**
