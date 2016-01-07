@@ -1,6 +1,6 @@
 <?php
 /**
- * InvalidArgumentException.php
+ * DuplicatedDiscriminatorException.php
  *
  * @copyright      More in license.md
  * @license        http://www.ipublikuj.eu
@@ -14,6 +14,6 @@
 
 namespace IPub\DoctrineDynamicDiscriminatorMap\Exceptions;
 
-class InvalidArgumentException extends \InvalidArgumentException implements IException
+class DuplicatedDiscriminatorException extends \InvalidArgumentException implements IException
 {
 }

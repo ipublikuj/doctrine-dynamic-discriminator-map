@@ -52,12 +52,22 @@ namespace Your\Namespace\Entity;
 use Doctrine;
 use Doctrine\ORM\Mapping as ORM;
 
+use IPub\DoctrineDynamicDiscriminatorMap\Entities;
+
 /**
  * @ORM\Entity
  */
-class Student extends Person
+class Student extends Person implements Entities\IDiscriminatorProvider
 {
     // ...
+
+    /**
+     * @return string
+     */
+    public function getDiscriminatorName()
+    {
+        return 'student';
+    }
 }
 ```
 
@@ -68,54 +78,25 @@ namespace Your\Namespace\Entity;
 use Doctrine;
 use Doctrine\ORM\Mapping as ORM;
 
+use IPub\DoctrineDynamicDiscriminatorMap\Entities;
+
 /**
  * @ORM\Entity
  */
-class Teacher extends Person
+class Teacher extends Person implements Entities\IDiscriminatorProvider
 {
     // ...
-}
-```
 
-And that is all. Now just insert configuration of your entities into application config.neon:
-
-```neon
-dynamicDiscriminatorMap:
-    mapping:
-        person:
-            entity: Your\Namespace\Entity\Person
-            map:
-                student: Your\Namespace\Entity\Student
-                teacher: Your\Namespace\Entity\Teacher
-```
-
-Or if you are using some modular system and want to implement maps dynamically, you cen do it with objects and services>
-
-```php
-namespace Your\Module\Namespace\DI;
-
-use Nette;
-use Nette\DI;
-
-class YourModuleExtension extends DI\CompilerExtension
-{
-    public function loadConfiguration()
+    /**
+     * @return string
+     */
+    public function getDiscriminatorName()
     {
-            // Get container builder
-            $builder = $this->getContainerBuilder();
-
-            /**
-             * Define dynamic discriminator map for identities
-             */
-    
-            $discriminatorMap = $builder->getDefinition('dynamicDiscriminatorMap.map');
-
-            $mapItem = new DoctrineDynamicDiscriminatorMap\MapItem('person', 'Your\Namespace\Entity\Person');
-            $mapItem
-                ->addMap('student', 'Your\Namespace\Entity\Student')
-                ->addMap('teacher', 'Your\Namespace\Entity\Teacher');
-
-            $discriminatorMap->addSetup('addItem', [$mapItem]);
+        return 'teacher';
     }
 }
 ```
+
+Each entity which should be automatically added to discriminator map must implement interface ```IPub\DoctrineDynamicDiscriminatorMap\Entities\IDiscriminatorProvider``` and method **getDiscriminatorName** which have to return discriminator name.
+
+And that is all. No more configuration, everything is now automated.

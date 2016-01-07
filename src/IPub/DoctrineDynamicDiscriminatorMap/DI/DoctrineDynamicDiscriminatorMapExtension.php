@@ -2,58 +2,38 @@
 /**
  * DoctrineDynamicDiscriminatorMapExtension.php
  *
- * @copyright	More in license.md
- * @license		http://www.ipublikuj.eu
- * @author		Adam Kadlec http://www.ipublikuj.eu
- * @package		iPublikuj:DoctrineDynamicDiscriminatorMap!
- * @subpackage	DI
- * @since		5.0
+ * @copyright      More in license.md
+ * @license        http://www.ipublikuj.eu
+ * @author         Adam Kadlec http://www.ipublikuj.eu
+ * @package        iPublikuj:DoctrineDynamicDiscriminatorMap!
+ * @subpackage     DI
+ * @since          5.0
  *
- * @date		06.12.15
+ * @date           06.12.15
  */
 
 namespace IPub\DoctrineDynamicDiscriminatorMap\DI;
 
 use Nette;
 use Nette\DI;
-use Nette\Utils;
 use Nette\PhpGenerator as Code;
 
-use IPub;
-use IPub\DoctrineDynamicDiscriminatorMap;
-
-class DoctrineDynamicDiscriminatorMapExtension extends DI\CompilerExtension
+/**
+ * Doctrine dynamic discriminator map extension container
+ *
+ * @package        iPublikuj:DoctrineDynamicDiscriminatorMap!
+ * @subpackage     DI
+ *
+ * @author         Adam Kadlec <adam.kadlec@fastybird.com>
+ */
+final class DoctrineDynamicDiscriminatorMapExtension extends DI\CompilerExtension
 {
-	/**
-	 * Extension default configuration
-	 *
-	 * @var array
-	 */
-	protected $defaults = [
-		'mapping' => []
-	];
-
 	public function loadConfiguration()
 	{
-		$config = $this->getConfig($this->defaults);
 		$builder = $this->getContainerBuilder();
 
-		$builder->addDefinition($this->prefix('map'))
-			->setClass('IPub\DoctrineDynamicDiscriminatorMap\Map');
-
-		foreach($config['mapping'] as $entityName => $map) {
-			$mapItem = new DoctrineDynamicDiscriminatorMap\MapItem($entityName, $map['entity']);
-
-			foreach($map['map'] as $name=>$entity) {
-				$mapItem->addMap($name, $entity);
-			}
-
-			$builder->getDefinition($this->prefix('map'))
-				->addSetup('addItem', [$mapItem]);
-		}
-
 		// Define events
-		$builder->addDefinition($this->prefix('listeners.dynamicDiscriminatorListener'))
+		$builder->addDefinition($this->prefix('listeners'))
 			->setClass('IPub\DoctrineDynamicDiscriminatorMap\Events\DynamicDiscriminatorListener')
 			->addTag('kdyby.subscriber');
 	}

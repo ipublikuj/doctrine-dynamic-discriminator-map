@@ -1,7 +1,7 @@
 {
 	"name"			: "ipub/doctrine-dynamic-discriminator-map",
 	"type"			: "library",
-	"description"	: "Dynamic discriminator map for doctrine and Nette Framework",
+	"description"	: "Dynamic discriminator map for Doctrine2 and Nette Framework",
 	"keywords"		: ["doctrine2", "doctrine", "nette", "ipub", "ipublikuj", "tools"],
 	"homepage"		: "https://github.com/iPublikuj/doctrine-dynamic-discriminator-map",
 	"license"		: ["BSD-3-Clause", "GPL-2.0", "GPL-3.0"],
@@ -20,24 +20,34 @@
 	},
 
 	"require": {
-		"php"			: ">=5.4",
+		"php"	: ">=5.4",
+
+		"doctrine/orm"	: "~2.4",
+
 		"nette/di"		: "~2.2",
-		"nette/utils"	: "~2.2",
+
 		"kdyby/events"	: "~2.0"
 	},
 
 	"require-dev": {
-		"nette/tester"		: "@dev",
+		"nette/bootstrap"		: "~2.2",
+		"nette/mail"			: "~2.2",
+		"nette/safe-stream"		: "~2.2",
+		"nette/robot-loader"	: "~2.2",
+		"nette/tester"			: "@dev",
+
+		"kdyby/doctrine"		: "~2.3",
+		"kdyby/events"			: "~2.3",
+		"kdyby/doctrine-cache"	: "~2.3",
+
+		"tracy/tracy"	: "@dev",
+
 		"janmarek/mockista"	: "@dev"
 	},
 
 	"autoload": {
-		"psr-4": {
-			"IPub\\DoctrineDynamicDiscriminatorMap\\": "src/IPub/DoctrineDynamicDiscriminatorMap/"
+		"psr-0": {
+			"IPub\\DoctrineDynamicDiscriminatorMap\\": "src/"
 		}
-	},
-
-	"autoload-dev": {
-		"classmap": ["tests/IPubTests/"]
 	}
 }

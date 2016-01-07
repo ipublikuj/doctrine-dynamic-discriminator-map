@@ -1,8 +1,12 @@
 # Dynamic discriminator map
 
+[![Build Status](https://img.shields.io/travis/iPublikuj/doctrine-dynamic-discriminator-map.svg?style=flat-square)](https://travis-ci.org/iPublikuj/doctrine-dynamic-discriminator-map)
+[![Scrutinizer Code Coverage](https://img.shields.io/scrutinizer/coverage/g/iPublikuj/doctrine-dynamic-discriminator-map.svg?style=flat-square)](https://scrutinizer-ci.com/g/iPublikuj/doctrine-dynamic-discriminator-map/?branch=master)
 [![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/iPublikuj/doctrine-dynamic-discriminator-map.svg?style=flat-square)](https://scrutinizer-ci.com/g/iPublikuj/doctrine-dynamic-discriminator-map/?branch=master)
 [![Latest Stable Version](https://img.shields.io/packagist/v/ipub/doctrine-dynamic-discriminator-map.svg?style=flat-square)](https://packagist.org/packages/ipub/doctrine-dynamic-discriminator-map)
 [![Composer Downloads](https://img.shields.io/packagist/dt/ipub/doctrine-dynamic-discriminator-map.svg?style=flat-square)](https://packagist.org/packages/ipub/doctrine-dynamic-discriminator-map)
+[![License](https://img.shields.io/packagist/l/ipub/doctrine-dynamic-discriminator-map.svg?style=flat-square)](https://packagist.org/packages/ipub/doctrine-dynamic-discriminator-map)
+[![Dependency Status](https://img.shields.io/versioneye/d/user/projects/568ae065eb4f47003c00103e.svg?style=flat-square)](https://www.versioneye.com/user/projects/568ae065eb4f47003c00103e)
 
 Extension for creating confirm action dialogs for various items for [Nette Framework](http://nette.org/)
 
