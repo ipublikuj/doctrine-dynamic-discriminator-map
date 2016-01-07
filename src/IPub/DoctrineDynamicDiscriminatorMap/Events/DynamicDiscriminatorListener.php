@@ -163,7 +163,7 @@ final class DynamicDiscriminatorListener extends Nette\Object implements Events\
 	 */
 	private function ensureDiscriminatorIsUnique($discriminator, \ReflectionClass $class)
 	{
-		if (in_array($discriminator, self::$discriminators)) {
+		if (in_array($discriminator, array_keys(self::$discriminators))) {
 			throw new Exceptions\DuplicatedDiscriminatorException(sprintf('Found duplicate discriminator map entry "%s" in "%s".', $discriminator, $class->getName()));
 		}
 	}
