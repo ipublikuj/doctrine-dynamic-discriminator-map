@@ -6,7 +6,7 @@
 [![Latest Stable Version](https://img.shields.io/packagist/v/ipub/doctrine-dynamic-discriminator-map.svg?style=flat-square)](https://packagist.org/packages/ipub/doctrine-dynamic-discriminator-map)
 [![Composer Downloads](https://img.shields.io/packagist/dt/ipub/doctrine-dynamic-discriminator-map.svg?style=flat-square)](https://packagist.org/packages/ipub/doctrine-dynamic-discriminator-map)
 [![License](https://img.shields.io/packagist/l/ipub/doctrine-dynamic-discriminator-map.svg?style=flat-square)](https://packagist.org/packages/ipub/doctrine-dynamic-discriminator-map)
-[![Dependency Status](https://img.shields.io/versioneye/d/user/projects/568ae065eb4f47003c00103e.svg?style=flat-square)](https://www.versioneye.com/user/projects/568ae065eb4f47003c00103e)
+[![Dependency Status](https://img.shields.io/versioneye/d/user/projects/568ecbc2691e2d0038000085.svg?style=flat-square)](https://www.versioneye.com/user/projects/568ecbc2691e2d0038000085)
 
 Extension for creating confirm action dialogs for various items for [Nette Framework](http://nette.org/)
 
