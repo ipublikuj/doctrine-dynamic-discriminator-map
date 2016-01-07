@@ -22,7 +22,7 @@ use IPub\DoctrineDynamicDiscriminatorMap\Entities;
 /**
  * @ORM\Entity
  */
-class SuperStudentEntity extends PersonEntity implements Entities\IDiscriminatorProvider
+class StudentEntity extends PersonEntity implements Entities\IDiscriminatorProvider
 {
 	/**
 	 * @return string
