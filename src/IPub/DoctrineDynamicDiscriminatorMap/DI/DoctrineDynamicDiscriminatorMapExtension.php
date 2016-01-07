@@ -18,6 +18,12 @@ use Nette;
 use Nette\DI;
 use Nette\PhpGenerator as Code;
 
+use Kdyby;
+use Kdyby\Events as KdybyEvents;
+
+use IPub\DoctrineDynamicDiscriminatorMap;
+use IPub\DoctrineDynamicDiscriminatorMap\Events;
+
 /**
  * Doctrine dynamic discriminator map extension container
  *
@@ -34,8 +40,8 @@ final class DoctrineDynamicDiscriminatorMapExtension extends DI\CompilerExtensio
 
 		// Define events
 		$builder->addDefinition($this->prefix('listeners'))
-			->setClass('IPub\DoctrineDynamicDiscriminatorMap\Events\DynamicDiscriminatorListener')
-			->addTag('kdyby.subscriber');
+			->setClass(Events\DynamicDiscriminatorListener::CLASS_NAME)
+			->addTag(KdybyEvents\DI\EventsExtension::TAG_SUBSCRIBER);
 	}
 
 	/**

@@ -39,6 +39,11 @@ use IPub\DoctrineDynamicDiscriminatorMap\Exceptions;
 final class DynamicDiscriminatorListener extends Nette\Object implements Events\Subscriber
 {
 	/**
+	 * Define class name
+	 */
+	const CLASS_NAME = __CLASS__;
+
+	/**
 	 * @var ORM\EntityManagerInterface
 	 */
 	private $em;
@@ -132,7 +137,7 @@ final class DynamicDiscriminatorListener extends Nette\Object implements Events\
 			return FALSE;
 		}
 
-		if (!$classReflection->implementsInterface(Entities\IDiscriminatorProvider::class)) {
+		if (!$classReflection->implementsInterface(Entities\IDiscriminatorProvider::CLASS_NAME)) {
 			return FALSE;
 		}
 

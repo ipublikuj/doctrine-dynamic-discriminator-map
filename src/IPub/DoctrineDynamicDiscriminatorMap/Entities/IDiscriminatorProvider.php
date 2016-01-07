@@ -25,6 +25,11 @@ namespace IPub\DoctrineDynamicDiscriminatorMap\Entities;
 interface IDiscriminatorProvider
 {
 	/**
+	 * Define class name
+	 */
+	const CLASS_NAME = __CLASS__;
+
+	/**
 	 * @return string
 	 */
 	function getDiscriminatorName();
