@@ -18,9 +18,9 @@ use Doctrine;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\MappedSuperclass
  */
-class NotMappedEntity extends PersonEntity
+abstract class AbstractEntity extends PersonEntity
 {
 
 }

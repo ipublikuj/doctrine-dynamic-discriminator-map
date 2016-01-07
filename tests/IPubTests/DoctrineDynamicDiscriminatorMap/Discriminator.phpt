@@ -1,6 +1,6 @@
 <?php
 /**
- * Test: IPub\DoctrineDynamicDiscriminatorMap\Blameable
+ * Test: IPub\DoctrineDynamicDiscriminatorMap\Discriminator
  * @testCase
  *
  * @copyright      More in license.md
@@ -36,7 +36,7 @@ require_once __DIR__ . '/models/StudentEntity.php';
 require_once __DIR__ . '/models/TeacherEntity.php';
 
 /**
- * Registering doctrine blameable functions tests
+ * Using dynamic discriminator map functions tests
  *
  * @package        iPublikuj:DoctrineDynamicDiscriminatorMap!
  * @subpackage     Tests
@@ -94,8 +94,8 @@ class Discriminator extends Tester\TestCase
 		Assert::equal(1, count($students));
 		Assert::equal('student', reset($students)->getUsername());
 
-		$teacher = new Models\NotMappedEntity;
-		$teacher->setUsername('unknown');
+		$teacher = new Models\StudentParentEntity();
+		$teacher->setUsername('student-parents');
 
 		$this->em->persist($teacher);
 		$this->em->flush();
@@ -105,7 +105,7 @@ class Discriminator extends Tester\TestCase
 		/** @var Models\PersonEntity[]|NULL $persons */
 		$persons = $this->em->getRepository('IPubTests\DoctrineDynamicDiscriminatorMap\Models\PersonEntity')->findAll();
 
-		Assert::equal(2, count($persons));
+		Assert::equal(3, count($persons));
 	}
 
 	private function generateDbSchema()
