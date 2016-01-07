@@ -52,8 +52,6 @@ class ExtensionTest extends Tester\TestCase
 
 		DoctrineDynamicDiscriminatorMap\DI\DoctrineDynamicDiscriminatorMapExtension::register($config);
 
-		$config->addConfig(__DIR__ . '/files/config.neon', $config::NONE);
-
 		return $config->createContainer();
 	}
 }
