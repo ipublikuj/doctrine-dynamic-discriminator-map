@@ -1,0 +1,4 @@
+doctrine:
+	metadata:
+		IPubTests\DoctrineDynamicDiscriminatorMap: %appDir%IPubTests/DoctrineDynamicDiscriminatorMap/models
+		IPubTests\DoctrineDynamicDiscriminatorMapExtended: %appDir%IPubTests/DoctrineDynamicDiscriminatorMap/secondModels
