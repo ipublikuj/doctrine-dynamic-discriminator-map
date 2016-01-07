@@ -37,7 +37,6 @@
 		"nette/tester"			: "@dev",
 
 		"kdyby/doctrine"		: "~3.0",
-		"kdyby/events"			: "~3.0",
 		"kdyby/doctrine-cache"	: "~2.3",
 
 		"tracy/tracy"	: "@dev",
