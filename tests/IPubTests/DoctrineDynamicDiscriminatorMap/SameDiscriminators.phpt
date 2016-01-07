@@ -69,6 +69,11 @@ class SameDiscriminators extends Tester\TestCase
 	public function testMapping()
 	{
 		$this->generateDbSchema();
+
+		/** @var Models\PersonEntity[]|NULL $persons */
+		$persons = $this->em->getRepository('IPubTests\DoctrineDynamicDiscriminatorMap\Models\PersonEntity')->findAll();
+
+		Assert::equal(0, count($persons));
 	}
 
 	private function generateDbSchema()
