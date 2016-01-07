@@ -16,8 +16,8 @@ $composer['require']['nette/application'] = $version;
 $composer['require']['nette/di'] = $version;
 
 if ($version === '~2.2.0') {
-	$composer['require']['kdyby/doctrine'] = '2.3.1';
-	$composer['require']['kdyby/events'] = '2.3.2';
+	$composer['require-dev']['kdyby/doctrine'] = '2.3.1';
+	$composer['require-dev']['kdyby/events'] = '2.3.2';
 }
 
 $content = json_encode($composer);
