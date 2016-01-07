@@ -1,6 +1,6 @@
 <?php
 /**
- * DynamicDiscriminatorListener.php
+ * DynamicDiscriminatorSubscriber.php
  *
  * @copyright      More in license.md
  * @license        http://www.ipublikuj.eu
@@ -29,7 +29,7 @@ use IPub\DoctrineDynamicDiscriminatorMap\Entities;
 use IPub\DoctrineDynamicDiscriminatorMap\Exceptions;
 
 /**
- * Doctrine dynamic discriminator map listener
+ * Doctrine dynamic discriminator map subscriber
  *
  * @package        iPublikuj:DoctrineDynamicDiscriminatorMap!
  * @subpackage     Events
