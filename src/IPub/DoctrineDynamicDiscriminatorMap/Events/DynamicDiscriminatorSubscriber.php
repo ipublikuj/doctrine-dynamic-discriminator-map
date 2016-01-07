@@ -20,9 +20,6 @@ use Doctrine;
 use Doctrine\Common;
 use Doctrine\ORM;
 
-use Kdyby;
-use Kdyby\Events;
-
 use IPub;
 use IPub\DoctrineDynamicDiscriminatorMap;
 use IPub\DoctrineDynamicDiscriminatorMap\Entities;
@@ -36,17 +33,12 @@ use IPub\DoctrineDynamicDiscriminatorMap\Exceptions;
  *
  * @author         Adam Kadlec <adam.kadlec@fastybird.com>
  */
-final class DynamicDiscriminatorListener extends Nette\Object implements Events\Subscriber
+final class DynamicDiscriminatorSubscriber extends Nette\Object implements Common\EventSubscriber
 {
 	/**
 	 * Define class name
 	 */
 	const CLASS_NAME = __CLASS__;
-
-	/**
-	 * @var ORM\EntityManagerInterface
-	 */
-	private $em;
 
 	/**
 	 * @var array
@@ -63,14 +55,6 @@ final class DynamicDiscriminatorListener extends Nette\Object implements Events\
 		return [
 			'Doctrine\\ORM\\Event::loadClassMetadata'
 		];
-	}
-
-	/**
-	 * @param ORM\EntityManagerInterface $em
-	 */
-	public function __construct(ORM\EntityManagerInterface $em)
-	{
-		$this->em = $em;
 	}
 
 	/**
@@ -91,7 +75,9 @@ final class DynamicDiscriminatorListener extends Nette\Object implements Events\
 		/** @var ORM\Mapping\DiscriminatorMap $discriminatorMap */
 		$discriminatorMap = $reader->getClassAnnotation($classReflection, 'Doctrine\ORM\Mapping\DiscriminatorMap');
 
-		if ($discriminatorMap !== NULL && ($discriminatorMapExtension = $this->detectFromChildren($classReflection)) && $discriminatorMapExtension !== []) {
+		$em = $eventArgs->getEntityManager();
+
+		if ($discriminatorMap !== NULL && ($discriminatorMapExtension = $this->detectFromChildren($em, $classReflection)) && $discriminatorMapExtension !== []) {
 			$extendedDiscriminatorMap = array_merge($discriminatorMap->value, $discriminatorMapExtension);
 
 			$metadata->setDiscriminatorMap($extendedDiscriminatorMap);
@@ -99,15 +85,16 @@ final class DynamicDiscriminatorListener extends Nette\Object implements Events\
 	}
 
 	/**
+	 * @param ORM\EntityManager $em
 	 * @param \ReflectionClass $parentClassReflection
 	 *
-	 * @return string[]
+	 * @return array
 	 */
-	private function detectFromChildren(\ReflectionClass $parentClassReflection)
+	private function detectFromChildren(ORM\EntityManager $em, \ReflectionClass $parentClassReflection)
 	{
 		self::$discriminators = [];
 
-		foreach ($this->em->getConfiguration()->getMetadataDriverImpl()->getAllClassNames() as $class) {
+		foreach ($em->getConfiguration()->getMetadataDriverImpl()->getAllClassNames() as $class) {
 			$childrenClassReflection = new \ReflectionClass($class);
 
 			if ($childrenClassReflection->getParentClass() === NULL) {
