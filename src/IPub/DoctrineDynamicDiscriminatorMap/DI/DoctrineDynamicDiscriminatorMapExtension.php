@@ -44,6 +44,7 @@ final class DoctrineDynamicDiscriminatorMapExtension extends DI\CompilerExtensio
 	{
 		$builder = $this->getContainerBuilder();
 
+		Nette\Diagnostics\Debugger::barDump($builder->getDefinitions());
 		$builder->getDefinition($builder->getByType('Doctrine\ORM\EntityManagerInterface'))
 			->addSetup('?->getEventManager()->addEventSubscriber(?)', ['@self', $builder->getDefinition($this->prefix('subscriber'))]);
 	}
