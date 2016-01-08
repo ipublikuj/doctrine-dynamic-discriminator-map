@@ -40,8 +40,15 @@ final class DoctrineDynamicDiscriminatorMapExtension extends DI\CompilerExtensio
 
 		// Define events
 		$builder->addDefinition($this->prefix('subscriber'))
-			->setClass(Events\DynamicDiscriminatorSubscriber::CLASS_NAME)
-			->addTag(KdybyEvents\DI\EventsExtension::TAG_SUBSCRIBER);
+			->setClass(Events\DynamicDiscriminatorSubscriber::CLASS_NAME);
+	}
+
+	public function beforeCompile()
+	{
+		$builder = $this->getContainerBuilder();
+
+		$builder->getDefinition($builder->getByType('Doctrine\ORM\EntityManager'))
+			->addSetup('?->getEventManager()->addEventSubscriber(?)', ['@self', $builder->getDefinition($this->prefix('subscriber'))]);
 	}
 
 	/**
