@@ -105,7 +105,7 @@ final class DynamicDiscriminatorSubscriber extends Nette\Object implements Commo
 				continue;
 			}
 
-			if ($discriminator = $this->detectDiscriminatorForClass($childrenClassReflection)) {
+			if ($discriminator = $this->getDiscriminatorForClass($childrenClassReflection)) {
 				self::$discriminators[$discriminator] = $class;
 			}
 		}
@@ -118,23 +118,24 @@ final class DynamicDiscriminatorSubscriber extends Nette\Object implements Commo
 	 *
 	 * @return bool
 	 */
-	private function detectDiscriminatorForClass(\ReflectionClass $classReflection)
+	private function getDiscriminatorForClass(\ReflectionClass $classReflection)
 	{
 		if ($classReflection->isAbstract()) {
 			return FALSE;
 		}
 
-		if (!$classReflection->implementsInterface(Entities\IDiscriminatorProvider::CLASS_NAME)) {
-			return FALSE;
-		}
+		if ($classReflection->implementsInterface(Entities\IDiscriminatorProvider::CLASS_NAME)) {
+			/** @var Entities\IDiscriminatorProvider $object */
+			$object = $classReflection->newInstanceWithoutConstructor();
 
-		/** @var Entities\IDiscriminatorProvider $object */
-		$object = $classReflection->newInstanceWithoutConstructor();
+			$discriminator = $object->getDiscriminatorName();
 
-		$discriminator = $object->getDiscriminatorName();
+			if (!$discriminator) {
+				return FALSE;
+			}
 
-		if (!$discriminator) {
-			return FALSE;
+		} else {
+			$discriminator = lcfirst($classReflection->getName());
 		}
 
 		$this->ensureDiscriminatorIsUnique($discriminator, $classReflection);
