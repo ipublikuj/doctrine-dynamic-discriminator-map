@@ -18,9 +18,6 @@ use Nette;
 use Nette\DI;
 use Nette\PhpGenerator as Code;
 
-use Kdyby;
-use Kdyby\Events as KdybyEvents;
-
 use IPub\DoctrineDynamicDiscriminatorMap;
 use IPub\DoctrineDynamicDiscriminatorMap\Events;
 
