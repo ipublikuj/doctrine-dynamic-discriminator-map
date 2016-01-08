@@ -20,7 +20,6 @@ use Nette\PhpGenerator as Code;
 
 use IPub\DoctrineDynamicDiscriminatorMap;
 use IPub\DoctrineDynamicDiscriminatorMap\Events;
-use Tracy\Debugger;
 
 /**
  * Doctrine dynamic discriminator map extension container
@@ -45,8 +44,7 @@ final class DoctrineDynamicDiscriminatorMapExtension extends DI\CompilerExtensio
 	{
 		$builder = $this->getContainerBuilder();
 
-		Debugger::dump($builder->getDefinitions());
-		$builder->getDefinition($builder->getByType('Doctrine\ORM\EntityManagerInterface'))
+		$builder->getDefinition($builder->getByType('Doctrine\ORM\EntityManagerInterface') ?: 'doctrine.default.entityManager')
 			->addSetup('?->getEventManager()->addEventSubscriber(?)', ['@self', $builder->getDefinition($this->prefix('subscriber'))]);
 	}
 
