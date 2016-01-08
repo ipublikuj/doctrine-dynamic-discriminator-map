@@ -97,6 +97,27 @@ class Teacher extends Person implements Entities\IDiscriminatorProvider
 }
 ```
 
-Each entity which should be automatically added to discriminator map must implement interface ```IPub\DoctrineDynamicDiscriminatorMap\Entities\IDiscriminatorProvider``` and method **getDiscriminatorName** which have to return discriminator name.
+Each entity which should be automatically added to discriminator map should implement interface ```IPub\DoctrineDynamicDiscriminatorMap\Entities\IDiscriminatorProvider``` and method ```getDiscriminatorName``` which have to return discriminator name. In case not implementing interface, extension will take short class name, lowercase first letter and use it as key value in discriminator map.
+
+
+```php
+<?php
+namespace Your\Namespace\Entity;
+
+use Doctrine;
+use Doctrine\ORM\Mapping as ORM;
+
+use IPub\DoctrineDynamicDiscriminatorMap\Entities;
+
+/**
+ * @ORM\Entity
+ */
+class Principal extends Person
+{
+    // ...
+    // a key for discriminator map word "principal" will be used
+    // ...
+}
+```
 
 And that is all. No more configuration, everything is now automated.

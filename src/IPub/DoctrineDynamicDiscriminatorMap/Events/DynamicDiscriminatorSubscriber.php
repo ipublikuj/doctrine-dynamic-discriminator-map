@@ -135,7 +135,7 @@ final class DynamicDiscriminatorSubscriber extends Nette\Object implements Commo
 			}
 
 		} else {
-			$discriminator = lcfirst($classReflection->getName());
+			$discriminator = lcfirst($classReflection->getShortName());
 		}
 
 		$this->ensureDiscriminatorIsUnique($discriminator, $classReflection);
