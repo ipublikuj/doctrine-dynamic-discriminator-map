@@ -104,7 +104,7 @@ class SameDiscriminators extends Tester\TestCase
 		$config->addParameters(['appDir' => $rootDir, 'wwwDir' => $rootDir]);
 
 		$config->addConfig(__DIR__ . '/files/config.neon');
-		$config->addConfig(__DIR__ . '/files/wrong-entities.neon', $config::NONE);
+		$config->addConfig(__DIR__ . '/files/wrong-entities.neon');
 
 		DoctrineDynamicDiscriminatorMap\DI\DoctrineDynamicDiscriminatorMapExtension::register($config);
 

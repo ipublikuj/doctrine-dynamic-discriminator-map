@@ -135,7 +135,7 @@ class Discriminator extends Tester\TestCase
 		$config->addParameters(['appDir' => $rootDir, 'wwwDir' => $rootDir]);
 
 		$config->addConfig(__DIR__ . '/files/config.neon');
-		$config->addConfig(__DIR__ . '/files/entities.neon', $config::NONE);
+		$config->addConfig(__DIR__ . '/files/entities.neon');
 
 		DoctrineDynamicDiscriminatorMap\DI\DoctrineDynamicDiscriminatorMapExtension::register($config);
 
