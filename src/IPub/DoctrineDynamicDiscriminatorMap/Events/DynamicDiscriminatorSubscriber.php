@@ -113,7 +113,7 @@ final class DynamicDiscriminatorSubscriber implements Common\EventSubscriber
 				continue;
 			}
 
-			$discriminator = $this->getDiscriminatorForClass($childrenClassReflection)
+			$discriminator = $this->getDiscriminatorForClass($childrenClassReflection);
 
 			if ($discriminator !== NULL) {
 				self::$discriminators[$discriminator] = $class;
