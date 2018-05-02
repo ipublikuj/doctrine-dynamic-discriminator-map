@@ -8,9 +8,9 @@
 
 	"authors": [
 		{
-			"name"		: "Adam Kadlec",
+			"name"		: "iPublikuj:cms",
 			"email"		: "info@ipublikuj.eu",
-			"homepage"	: "http://www.ipublikuj.eu/"
+			"homepage"	: "https://www.ipublikuj.eu/"
 		}
 	],
 
@@ -19,25 +19,37 @@
 		"issues"	:"https://github.com/iPublikuj/doctrine-dynamic-discriminator-map/issues"
 	},
 
+	"extra": {
+		"ipub"	: {
+			"configuration" : {
+				"extensions" : {
+					"doctrineDynamicDiscriminatorMap" : "IPub\\DoctrineDynamicDiscriminatorMap\\DI\\DoctrineDynamicDiscriminatorMapExtension"
+				}
+			}
+		}
+	},
+
 	"require": {
-		"php"	: ">=5.4",
+		"php"	: ">=7.1.0",
 
-		"doctrine/orm"	: "~2.4",
+		"doctrine/orm"	: "^2.5",
 
-		"nette/di"	: "~2.2"
+		"nette/di"	: "~2.4"
 	},
 
 	"require-dev": {
-		"nette/bootstrap"		: "~2.2",
-		"nette/mail"			: "~2.2",
-		"nette/safe-stream"		: "~2.2",
-		"nette/robot-loader"	: "~2.2",
-		"nette/tester"			: "@dev",
+		"nette/bootstrap"		: "~2.4",
+		"nette/mail"			: "~2.4",
+		"nette/robot-loader"	: "~2.4",
+		"nette/safe-stream"		: "~2.3",
+		"nette/tester"			: "~2.0",
 
-		"kdyby/doctrine"		: "~3.0",
-		"kdyby/doctrine-cache"	: "~2.3",
+		"tracy/tracy"	: "~2.4",
 
-		"tracy/tracy"	: "@dev"
+		"pds/skeleton"	: "~1.0",
+
+		"kdyby/doctrine"		: "~3.3",
+		"kdyby/doctrine-cache"	: "~2.6.2"
 	},
 
 	"autoload": {

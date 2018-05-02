@@ -5,13 +5,15 @@
  *
  * @copyright      More in license.md
  * @license        http://www.ipublikuj.eu
- * @author         Adam Kadlec http://www.ipublikuj.eu
+ * @author         Adam Kadlec <adam.kadlec@ipublikuj.eu>
  * @package        iPublikuj:DoctrineDynamicDiscriminatorMap!
  * @subpackage     Tests
  * @since          1.0.1
  *
  * @date           07.01.16
  */
+
+declare(strict_types = 1);
 
 namespace IPubTests\DoctrineDynamicDiscriminatorMap;
 
@@ -31,6 +33,7 @@ use IPub\DoctrineDynamicDiscriminatorMap\Events;
 use IPubTests\DoctrineDynamicDiscriminatorMap\Models;
 
 require __DIR__ . '/../bootstrap.php';
+
 require_once __DIR__ . '/models/PersonEntity.php';
 require_once __DIR__ . '/models/StudentEntity.php';
 require_once __DIR__ . '/models/TeacherEntity.php';
@@ -41,29 +44,33 @@ require_once __DIR__ . '/models/TeacherEntity.php';
  * @package        iPublikuj:DoctrineDynamicDiscriminatorMap!
  * @subpackage     Tests
  *
- * @author         Adam Kadlec <adam.kadlec@fastybird.com>
+ * @author         Adam Kadlec <adam.kadlec@ipublikuj.eu>
  */
 class Discriminator extends Tester\TestCase
 {
 	/**
-	 * @var \Nette\DI\Container
+	 * @var Nette\DI\Container
 	 */
 	private $container;
 
 	/**
-	 * @var \Kdyby\Doctrine\EntityManager
+	 * @var ORM\EntityManager
 	 */
 	private $em;
 
-	protected function setUp()
+	/**
+	 * @return void
+	 */
+	protected function setUp() : void
 	{
 		parent::setUp();
 
 		$this->container = $this->createContainer();
-		$this->em = $this->container->getByType('Kdyby\Doctrine\EntityManager');
+
+		$this->em = $this->container->getByType(ORM\EntityManager::class);
 	}
 
-	public function testMapping()
+	public function testMapping() : void
 	{
 		$this->generateDbSchema();
 
@@ -84,12 +91,12 @@ class Discriminator extends Tester\TestCase
 		$this->em->clear();
 
 		/** @var Models\PersonEntity[]|NULL $persons */
-		$persons = $this->em->getRepository('IPubTests\DoctrineDynamicDiscriminatorMap\Models\PersonEntity')->findAll();
+		$persons = $this->em->getRepository(Models\PersonEntity::class)->findAll();
 
 		Assert::equal(2, count($persons));
 
 		/** @var Models\StudentEntity[]|NULL $students */
-		$students = $this->em->getRepository('IPubTests\DoctrineDynamicDiscriminatorMap\Models\StudentEntity')->findAll();
+		$students = $this->em->getRepository(Models\StudentEntity::class)->findAll();
 
 		Assert::equal(1, count($students));
 		Assert::equal('student', reset($students)->getUsername());
@@ -103,7 +110,7 @@ class Discriminator extends Tester\TestCase
 		$this->em->clear();
 
 		/** @var Models\PersonEntity[]|NULL $persons */
-		$persons = $this->em->getRepository('IPubTests\DoctrineDynamicDiscriminatorMap\Models\PersonEntity')->findAll();
+		$persons = $this->em->getRepository(Models\PersonEntity::class)->findAll();
 
 		Assert::equal(3, count($persons));
 	}
@@ -117,7 +124,7 @@ class Discriminator extends Tester\TestCase
 	/**
 	 * @return Nette\DI\Container
 	 */
-	protected function createContainer()
+	protected function createContainer() : Nette\DI\Container
 	{
 		$rootDir = __DIR__ . '/../../';
 
@@ -127,7 +134,7 @@ class Discriminator extends Tester\TestCase
 		$config->addParameters(['container' => ['class' => 'SystemContainer_' . md5('withModel')]]);
 		$config->addParameters(['appDir' => $rootDir, 'wwwDir' => $rootDir]);
 
-		$config->addConfig(__DIR__ . '/files/config.neon', !isset($config->defaultExtensions['nette']) ? 'v23' : 'v22');
+		$config->addConfig(__DIR__ . '/files/config.neon');
 		$config->addConfig(__DIR__ . '/files/entities.neon', $config::NONE);
 
 		DoctrineDynamicDiscriminatorMap\DI\DoctrineDynamicDiscriminatorMapExtension::register($config);

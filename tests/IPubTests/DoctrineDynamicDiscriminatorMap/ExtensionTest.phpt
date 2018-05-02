@@ -5,13 +5,15 @@
  *
  * @copyright      More in license.md
  * @license        http://www.ipublikuj.eu
- * @author         Adam Kadlec http://www.ipublikuj.eu
+ * @author         Adam Kadlec <adam.kadlec@ipublikuj.eu>
  * @package        iPublikuj:DoctrineDynamicDiscriminatorMap!
  * @subpackage     Tests
  * @since          1.0.1
  *
  * @date           07.01.16
  */
+
+declare(strict_types = 1);
 
 namespace IPubTests\DoctrineDynamicDiscriminatorMap;
 
@@ -20,7 +22,6 @@ use Nette;
 use Tester;
 use Tester\Assert;
 
-use IPub;
 use IPub\DoctrineDynamicDiscriminatorMap;
 
 require __DIR__ . '/../bootstrap.php';
@@ -31,11 +32,11 @@ require __DIR__ . '/../bootstrap.php';
  * @package        iPublikuj:DoctrineDynamicDiscriminatorMap!
  * @subpackage     Tests
  *
- * @author         Adam Kadlec <adam.kadlec@fastybird.com>
+ * @author         Adam Kadlec <adam.kadlec@ipublikuj.eu>
  */
 class ExtensionTest extends Tester\TestCase
 {
-	public function testFunctional()
+	public function testFunctional() : void
 	{
 		$dic = $this->createContainer();
 
@@ -45,7 +46,7 @@ class ExtensionTest extends Tester\TestCase
 	/**
 	 * @return Nette\DI\Container
 	 */
-	protected function createContainer()
+	protected function createContainer() : Nette\DI\Container
 	{
 		$rootDir = __DIR__ . '/../../';
 
@@ -55,7 +56,7 @@ class ExtensionTest extends Tester\TestCase
 		$config->addParameters(['container' => ['class' => 'SystemContainer_' . md5(time())]]);
 		$config->addParameters(['appDir' => $rootDir, 'wwwDir' => $rootDir]);
 
-		$config->addConfig(__DIR__ . '/files/config.neon', !isset($config->defaultExtensions['nette']) ? 'v23' : 'v22');
+		$config->addConfig(__DIR__ . '/files/config.neon');
 
 		DoctrineDynamicDiscriminatorMap\DI\DoctrineDynamicDiscriminatorMapExtension::register($config);
 

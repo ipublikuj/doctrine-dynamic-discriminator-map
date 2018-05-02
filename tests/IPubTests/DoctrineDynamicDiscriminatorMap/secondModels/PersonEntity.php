@@ -4,7 +4,7 @@
  *
  * @copyright      More in license.md
  * @license        http://www.ipublikuj.eu
- * @author         Adam Kadlec http://www.ipublikuj.eu
+ * @author         Adam Kadlec <adam.kadlec@ipublikuj.eu>
  * @package        iPublikuj:DoctrineDynamicDiscriminatorMap!
  * @subpackage     Tests
  * @since          1.0.1
@@ -12,9 +12,10 @@
  * @date           07.01.16
  */
 
+declare(strict_types = 1);
+
 namespace IPubTests\DoctrineDynamicDiscriminatorMap\SecondModels;
 
-use Doctrine;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -30,6 +31,7 @@ class PersonEntity
 {
 	/**
 	 * @var int
+	 *
 	 * @ORM\Id
 	 * @ORM\Column(type="integer")
 	 * @ORM\GeneratedValue(strategy="AUTO")
@@ -38,6 +40,7 @@ class PersonEntity
 
 	/**
 	 * @var string
+	 *
 	 * @ORM\Column(type="string")
 	 */
 	private $username;
@@ -45,15 +48,17 @@ class PersonEntity
 	/**
 	 * @return string
 	 */
-	public function getUsername()
+	public function getUsername() : string
 	{
 		return $this->username;
 	}
 
 	/**
 	 * @param string $username
+	 *
+	 * @return void
 	 */
-	public function setUsername($username)
+	public function setUsername(string $username) : void
 	{
 		$this->username = $username;
 	}

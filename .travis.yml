@@ -2,23 +2,17 @@ language: php
 
 env:
   - NETTE=default
-  - NETTE=~2.2.0
+  - NETTE=~2.4.0
 
 php:
-  - 5.4
-  - 5.5
-  - 5.6
-  - 7.0
-  - hhvm
+  - 7.1
+  - 7.2
 
-matrix:
-  allow_failures:
-    - php: hhvm
-    - php: 7.0
+before_install:
+  - composer self-update
 
 before_script:
   - php .travis.composer.php
-  - composer self-update
   - composer install --no-interaction --prefer-source --dev
 
 script:

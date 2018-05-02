@@ -6,7 +6,6 @@
 [![Latest Stable Version](https://img.shields.io/packagist/v/ipub/doctrine-dynamic-discriminator-map.svg?style=flat-square)](https://packagist.org/packages/ipub/doctrine-dynamic-discriminator-map)
 [![Composer Downloads](https://img.shields.io/packagist/dt/ipub/doctrine-dynamic-discriminator-map.svg?style=flat-square)](https://packagist.org/packages/ipub/doctrine-dynamic-discriminator-map)
 [![License](https://img.shields.io/packagist/l/ipub/doctrine-dynamic-discriminator-map.svg?style=flat-square)](https://packagist.org/packages/ipub/doctrine-dynamic-discriminator-map)
-[![Dependency Status](https://img.shields.io/versioneye/d/user/projects/568ecbc2691e2d0038000085.svg?style=flat-square)](https://www.versioneye.com/user/projects/568ecbc2691e2d0038000085)
 
 This extension adds support for dynamic definition of [Doctrine](http://www.doctrine-project.org/) discriminator map, so you can easily extend your entities in modules etc.
 
