@@ -37,7 +37,7 @@ final class DoctrineDynamicDiscriminatorMapExtension extends DI\CompilerExtensio
 
 		// Define events
 		$builder->addDefinition($this->prefix('subscriber'))
-			->setClass(Events\DynamicDiscriminatorSubscriber::CLASS_NAME);
+			->setClass(Events\DynamicDiscriminatorSubscriber::class);
 	}
 
 	public function beforeCompile()

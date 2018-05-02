@@ -24,6 +24,7 @@ use IPub;
 use IPub\DoctrineDynamicDiscriminatorMap;
 use IPub\DoctrineDynamicDiscriminatorMap\Entities;
 use IPub\DoctrineDynamicDiscriminatorMap\Exceptions;
+use Tracy\Debugger;
 
 /**
  * Doctrine dynamic discriminator map subscriber
@@ -33,12 +34,9 @@ use IPub\DoctrineDynamicDiscriminatorMap\Exceptions;
  *
  * @author         Adam Kadlec <adam.kadlec@fastybird.com>
  */
-final class DynamicDiscriminatorSubscriber extends Nette\Object implements Common\EventSubscriber
+final class DynamicDiscriminatorSubscriber implements Common\EventSubscriber
 {
-	/**
-	 * Define class name
-	 */
-	const CLASS_NAME = __CLASS__;
+	use Nette\SmartObject;
 
 	/**
 	 * @var array
@@ -53,7 +51,7 @@ final class DynamicDiscriminatorSubscriber extends Nette\Object implements Commo
 	public function getSubscribedEvents()
 	{
 		return [
-			'Doctrine\\ORM\\Event::loadClassMetadata'
+			ORM\Events::loadClassMetadata,
 		];
 	}
 
@@ -78,7 +76,13 @@ final class DynamicDiscriminatorSubscriber extends Nette\Object implements Commo
 		$em = $eventArgs->getEntityManager();
 
 		if ($discriminatorMap !== NULL && ($discriminatorMapExtension = $this->detectFromChildren($em, $classReflection)) && $discriminatorMapExtension !== []) {
-			$extendedDiscriminatorMap = array_merge($discriminatorMap->value, $discriminatorMapExtension);
+			$extendedDiscriminatorMap = $discriminatorMap->value;
+
+			foreach ($discriminatorMapExtension as $name => $className) {
+				if (array_search($className, $extendedDiscriminatorMap) === FALSE) {
+					$extendedDiscriminatorMap[$name] = $className;
+				}
+			}
 
 			$metadata->setDiscriminatorMap($extendedDiscriminatorMap);
 		}
@@ -124,7 +128,7 @@ final class DynamicDiscriminatorSubscriber extends Nette\Object implements Commo
 			return FALSE;
 		}
 
-		if ($classReflection->implementsInterface(Entities\IDiscriminatorProvider::CLASS_NAME)) {
+		if ($classReflection->implementsInterface(Entities\IDiscriminatorProvider::class)) {
 			/** @var Entities\IDiscriminatorProvider $object */
 			$object = $classReflection->newInstanceWithoutConstructor();
 
