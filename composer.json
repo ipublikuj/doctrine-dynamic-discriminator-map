@@ -1,60 +1,72 @@
 {
-	"name"			: "ipub/doctrine-dynamic-discriminator-map",
-	"type"			: "library",
-	"description"	: "Dynamic discriminator map for Doctrine2 and Nette Framework",
-	"keywords"		: ["doctrine2", "doctrine", "nette", "ipub", "ipublikuj", "tools"],
-	"homepage"		: "https://github.com/iPublikuj/doctrine-dynamic-discriminator-map",
-	"license"		: ["GPL-2.0", "GPL-3.0"],
+  "name" : "ipub/doctrine-dynamic-discriminator-map",
+  "type" : "library",
+  "description" : "Dynamic discriminator map for Doctrine2 and Nette Framework",
+  "keywords" : [
+    "doctrine2",
+    "doctrine",
+    "nette",
+    "ipub",
+    "ipublikuj",
+    "tools"
+  ],
+  "homepage" : "https://github.com/iPublikuj/doctrine-dynamic-discriminator-map",
+  "license" : [
+    "GPL-2.0",
+    "GPL-3.0"
+  ],
 
-	"authors": [
-		{
-			"name"		: "iPublikuj:cms",
-			"email"		: "info@ipublikuj.eu",
-			"homepage"	: "https://www.ipublikuj.eu/"
-		}
-	],
+  "authors" : [
+    {
+      "name" : "iPublikuj:cms",
+      "email" : "info@ipublikuj.eu",
+      "homepage" : "https://www.ipublikuj.eu/"
+    }
+  ],
 
-	"support":{
-		"email"		:"support@ipublikuj.eu",
-		"issues"	:"https://github.com/iPublikuj/doctrine-dynamic-discriminator-map/issues"
-	},
+  "support" : {
+    "email" : "support@ipublikuj.eu",
+    "issues" : "https://github.com/iPublikuj/doctrine-dynamic-discriminator-map/issues"
+  },
 
-	"extra": {
-		"ipub"	: {
-			"configuration" : {
-				"extensions" : {
-					"doctrineDynamicDiscriminatorMap" : "IPub\\DoctrineDynamicDiscriminatorMap\\DI\\DoctrineDynamicDiscriminatorMapExtension"
-				}
-			}
-		}
-	},
+  "extra" : {
+    "ipub" : {
+      "configuration" : {
+        "extensions" : {
+          "doctrineDynamicDiscriminatorMap" : "IPub\\DoctrineDynamicDiscriminatorMap\\DI\\DoctrineDynamicDiscriminatorMapExtension"
+        }
+      }
+    }
+  },
 
-	"require": {
-		"php"	: ">=7.1.0",
+  "require" : {
+    "php" : ">=7.2.0",
 
-		"doctrine/orm"	: "^2.5",
+    "doctrine/orm" : "~2.5",
 
-		"nette/di"	: "~2.4"
-	},
+    "nette/di" : "~2.4 || ~3.0"
+  },
 
-	"require-dev": {
-		"nette/bootstrap"		: "~2.4",
-		"nette/mail"			: "~2.4",
-		"nette/robot-loader"	: "~2.4",
-		"nette/safe-stream"		: "~2.3",
-		"nette/tester"			: "~2.0",
+  "require-dev" : {
+    "nette/bootstrap" : "~2.4 || ~3.0",
+    "nette/mail" : "~2.4 || ~3.0",
+    "nette/robot-loader" : "~2.4 || ~3.0",
+    "nette/safe-stream" : "~2.3",
+    "nette/tester" : "~2.3",
 
-		"tracy/tracy"	: "~2.4",
+    "nette/security" : "~2.4",
+    "nette/http" : "~2.4",
 
-		"pds/skeleton"	: "~1.0",
+    "tracy/tracy" : "~2.4",
 
-		"kdyby/doctrine"		: "~3.3",
-		"kdyby/doctrine-cache"	: "~2.6.2"
-	},
+    "pds/skeleton" : "~1.0",
 
-	"autoload": {
-		"psr-0": {
-			"IPub\\DoctrineDynamicDiscriminatorMap\\": "src/"
-		}
-	}
+    "kdyby/doctrine" : "^3.3"
+  },
+
+  "autoload" : {
+    "psr-0" : {
+      "IPub\\DoctrineDynamicDiscriminatorMap\\" : "src/"
+    }
+  }
 }
