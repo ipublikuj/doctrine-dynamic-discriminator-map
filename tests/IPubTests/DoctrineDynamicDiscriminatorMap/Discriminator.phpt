@@ -26,6 +26,8 @@ use Doctrine;
 use Doctrine\ORM;
 use Doctrine\Common;
 
+use Nettrine;
+
 use IPub;
 use IPub\DoctrineDynamicDiscriminatorMap;
 use IPub\DoctrineDynamicDiscriminatorMap\Events;
@@ -67,7 +69,7 @@ class Discriminator extends Tester\TestCase
 
 		$this->container = $this->createContainer();
 
-		$this->em = $this->container->getByType(ORM\EntityManager::class);
+		$this->em = $this->container->getByType(Nettrine\ORM\EntityManagerDecorator::class);
 	}
 
 	public function testMapping() : void

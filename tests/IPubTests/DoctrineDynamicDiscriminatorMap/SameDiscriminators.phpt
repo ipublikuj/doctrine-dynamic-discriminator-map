@@ -24,6 +24,8 @@ use Tester\Assert;
 
 use Doctrine\ORM;
 
+use Nettrine;
+
 use IPub\DoctrineDynamicDiscriminatorMap;
 use IPub\DoctrineDynamicDiscriminatorMap\Events;
 
@@ -63,7 +65,7 @@ class SameDiscriminators extends Tester\TestCase
 
 		$this->container = $this->createContainer();
 
-		$this->em = $this->container->getByType(ORM\EntityManager::class);
+		$this->em = $this->container->getByType(Nettrine\ORM\EntityManagerDecorator::class);
 	}
 
 	/**

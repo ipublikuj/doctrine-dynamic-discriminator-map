@@ -53,7 +53,7 @@ final class DoctrineDynamicDiscriminatorMapExtension extends DI\CompilerExtensio
 	{
 		$builder = $this->getContainerBuilder();
 
-		$builder->getDefinition($builder->getByType(Doctrine\ORM\EntityManagerInterface::class) ?: 'doctrine.default.entityManager')
+		$builder->getDefinition($builder->getByType('Doctrine\ORM\EntityManagerInterface', TRUE))
 			->addSetup('?->getEventManager()->addEventSubscriber(?)', ['@self', $builder->getDefinition($this->prefix('subscriber'))]);
 	}
 
