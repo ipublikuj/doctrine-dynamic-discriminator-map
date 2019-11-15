@@ -1,6 +1,7 @@
 <?php
 /**
  * Test: IPub\DoctrineDynamicDiscriminatorMap\Discriminator
+ *
  * @testCase
  *
  * @copyright      More in license.md
