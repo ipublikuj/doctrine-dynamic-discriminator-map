@@ -37,6 +37,7 @@ use IPubTests\DoctrineDynamicDiscriminatorMap\Models;
 
 require __DIR__ . '/../bootstrap.php';
 
+require_once __DIR__ . '/models/AbstractEntity.php';
 require_once __DIR__ . '/models/PersonEntity.php';
 require_once __DIR__ . '/models/StudentEntity.php';
 require_once __DIR__ . '/models/TeacherEntity.php';
