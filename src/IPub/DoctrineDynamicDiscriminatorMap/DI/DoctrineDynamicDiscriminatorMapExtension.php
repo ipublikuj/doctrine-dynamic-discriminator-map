@@ -63,8 +63,10 @@ final class DoctrineDynamicDiscriminatorMapExtension extends DI\CompilerExtensio
 	 *
 	 * @return void
 	 */
-	public static function register(Nette\Configurator $config, string $extensionName = 'dynamicDiscriminatorMap') : void
-	{
+	public static function register(
+		Nette\Configurator $config,
+		string $extensionName = 'dynamicDiscriminatorMap'
+	) : void {
 		$config->onCompile[] = function (Nette\Configurator $config, DI\Compiler $compiler) use ($extensionName) {
 			$compiler->addExtension($extensionName, new DoctrineDynamicDiscriminatorMapExtension);
 		};

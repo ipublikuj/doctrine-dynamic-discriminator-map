@@ -16,6 +16,9 @@ declare(strict_types = 1);
 
 namespace IPub\DoctrineDynamicDiscriminatorMap\Events;
 
+use ReflectionClass;
+use ReflectionException;
+
 use Nette;
 
 use Doctrine\Common;
@@ -61,6 +64,10 @@ final class DynamicDiscriminatorSubscriber implements Common\EventSubscriber
 	 * @param ORM\Event\LoadClassMetadataEventArgs $eventArgs
 	 *
 	 * @return void
+	 *
+	 * @throws Common\Annotations\AnnotationException
+	 * @throws ORM\ORMException
+	 * @throws ReflectionException
 	 */
 	public function loadClassMetadata(ORM\Event\LoadClassMetadataEventArgs $eventArgs) : void
 	{
@@ -69,7 +76,7 @@ final class DynamicDiscriminatorSubscriber implements Common\EventSubscriber
 		$classReflection = $metadata->getReflectionClass();
 
 		if ($classReflection === NULL) {
-			$classReflection = new \ReflectionClass($metadata->getName());
+			$classReflection = new ReflectionClass($metadata->getName());
 		}
 
 		$reader = new Common\Annotations\AnnotationReader;
@@ -94,16 +101,19 @@ final class DynamicDiscriminatorSubscriber implements Common\EventSubscriber
 
 	/**
 	 * @param ORM\EntityManager $em
-	 * @param \ReflectionClass $parentClassReflection
+	 * @param ReflectionClass $parentClassReflection
 	 *
 	 * @return array
+	 *
+	 * @throws ORM\ORMException
+	 * @throws ReflectionException
 	 */
-	private function detectFromChildren(ORM\EntityManager $em, \ReflectionClass $parentClassReflection) : array
+	private function detectFromChildren(ORM\EntityManager $em, ReflectionClass $parentClassReflection) : array
 	{
 		self::$discriminators = [];
 
 		foreach ($em->getConfiguration()->getMetadataDriverImpl()->getAllClassNames() as $class) {
-			$childrenClassReflection = new \ReflectionClass($class);
+			$childrenClassReflection = new ReflectionClass($class);
 
 			if ($childrenClassReflection->getParentClass() === NULL) {
 				continue;
@@ -124,11 +134,11 @@ final class DynamicDiscriminatorSubscriber implements Common\EventSubscriber
 	}
 
 	/**
-	 * @param \ReflectionClass $classReflection
+	 * @param ReflectionClass $classReflection
 	 *
 	 * @return string|NULL
 	 */
-	private function getDiscriminatorForClass(\ReflectionClass $classReflection) : ?string
+	private function getDiscriminatorForClass(ReflectionClass $classReflection) : ?string
 	{
 		if ($classReflection->isAbstract()) {
 			return NULL;
@@ -155,13 +165,13 @@ final class DynamicDiscriminatorSubscriber implements Common\EventSubscriber
 
 	/**
 	 * @param string $discriminator
-	 * @param \ReflectionClass $class
+	 * @param ReflectionClass $class
 	 *
 	 * @return void
 	 *
 	 * @throws Exceptions\DuplicatedDiscriminatorException
 	 */
-	private function ensureDiscriminatorIsUnique($discriminator, \ReflectionClass $class) : void
+	private function ensureDiscriminatorIsUnique($discriminator, ReflectionClass $class) : void
 	{
 		if (in_array($discriminator, array_keys(self::$discriminators))) {
 			throw new Exceptions\DuplicatedDiscriminatorException(sprintf('Found duplicate discriminator map entry "%s" in "%s".', $discriminator, $class->getName()));
