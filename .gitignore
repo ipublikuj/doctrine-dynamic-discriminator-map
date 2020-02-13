@@ -1,2 +1,4 @@
-composer.lock
-libs
+.idea
+/vendor
+/composer.lock
+tests/*/output
