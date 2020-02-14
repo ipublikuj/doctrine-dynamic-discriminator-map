@@ -20,7 +20,6 @@ use Doctrine;
 
 use Nette;
 use Nette\DI;
-use Nette\PhpGenerator as Code;
 
 use IPub\DoctrineDynamicDiscriminatorMap\Events;
 
