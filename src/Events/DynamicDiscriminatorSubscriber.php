@@ -30,8 +30,6 @@ use ReflectionException;
  * @subpackage     Events
  *
  * @author         Adam Kadlec <adam.kadlec@ipublikuj.eu>
- *
- * @template TEntityClass of object
  */
 final class DynamicDiscriminatorSubscriber implements Common\EventSubscriber
 {
@@ -64,7 +62,7 @@ final class DynamicDiscriminatorSubscriber implements Common\EventSubscriber
 	public function loadClassMetadata(ORM\Event\LoadClassMetadataEventArgs $eventArgs): void
 	{
 		$metadata = $eventArgs->getClassMetadata();
-		/** @phpstan-var ReflectionClass<TEntityClass> $classReflection */
+		/** @phpstan-var ReflectionClass<object> $classReflection */
 		$classReflection = $metadata->getReflectionClass();
 
 		$reader = new Common\Annotations\AnnotationReader();
@@ -104,7 +102,7 @@ final class DynamicDiscriminatorSubscriber implements Common\EventSubscriber
 	 * @throws Exceptions\InvalidStateException
 	 * @throws ReflectionException
 	 *
-	 * @phpstan-param ReflectionClass<TEntityClass> $parentClassReflection
+	 * @phpstan-param ReflectionClass<object> $parentClassReflection
 	 */
 	private function detectFromChildren(ORM\EntityManager $em, ReflectionClass $parentClassReflection): array
 	{
@@ -116,9 +114,9 @@ final class DynamicDiscriminatorSubscriber implements Common\EventSubscriber
 			throw new Exceptions\InvalidStateException('Entity manager mapping driver could not be loaded');
 		}
 
-		/** @phpstan-var class-string of object $class */
+		/** @phpstan-var class-string $class */
 		foreach ($mappingDriver->getAllClassNames() as $class) {
-			/** @phpstan-var ReflectionClass<TEntityClass> $childrenClassReflection */
+			/** @phpstan-var ReflectionClass<object> $childrenClassReflection */
 			$childrenClassReflection = new ReflectionClass($class);
 
 			if ($childrenClassReflection->getParentClass() === false) {
@@ -146,7 +144,7 @@ final class DynamicDiscriminatorSubscriber implements Common\EventSubscriber
 	 *
 	 * @throws ReflectionException
 	 *
-	 * @phpstan-param ReflectionClass<TEntityClass> $classReflection
+	 * @phpstan-param ReflectionClass<object> $classReflection
 	 */
 	private function getDiscriminatorForClass(ReflectionClass $classReflection): ?string
 	{
@@ -177,7 +175,7 @@ final class DynamicDiscriminatorSubscriber implements Common\EventSubscriber
 	 *
 	 * @throws Exceptions\DuplicatedDiscriminatorException
 	 *
-	 * @phpstan-param ReflectionClass<TEntityClass> $classReflection
+	 * @phpstan-param ReflectionClass<object> $classReflection
 	 */
 	private function ensureDiscriminatorIsUnique(string $discriminator, ReflectionClass $classReflection): void
 	{

@@ -4,10 +4,10 @@ This extension adds support for dynamic definition of [Doctrine](http://www.doct
 
 ## Installation
 
-The best way to install ipub/doctrine-dynamic-discriminator-map is using [Composer](http://getcomposer.org/):
+The best way to install **ipub/doctrine-dynamic-discriminator-map** is using [Composer](http://getcomposer.org/):
 
 ```sh
-$ composer require ipub/doctrine-dynamic-discriminator-map
+composer require ipub/doctrine-dynamic-discriminator-map
 ```
 
 After that you have to register extension in config.neon.
